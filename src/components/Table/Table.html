@@ -1,9 +1,10 @@
-<div id="app">
-  <v-app id="inspire">
+<div>
+  <v-app id="table">
     <v-data-table
       :headers="headers"
       :items="stations"
-      class="elevation-1">
+      class="elevation-1"
+      dark>
 
       <template v-slot:items="props">
         <td>{{ props.item.number }}</td>

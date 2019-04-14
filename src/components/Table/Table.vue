@@ -14,18 +14,11 @@ export default {
   computed: {
     stations() {
       const arr = []
+      const stations = this.$store.getters.getStations
 
-      const x = this.$store.getters.getStations
-      const a = x.map(el => el.stations)
+      stations.map(el => el.stations)
+              .map(el => el.map(el => arr.push(el)))
 
-      a.map(el => {
-        el.map(el => {
-          console.log(el)
-          arr.push(el)
-        })
-      })
-
-      console.log(arr)
       return arr
     },
   },
@@ -41,4 +34,7 @@ export default {
 </script>
 
 <style scoped>
+  #table {
+    background: #46494c;
+  }
 </style>
