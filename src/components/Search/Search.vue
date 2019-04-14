@@ -7,9 +7,9 @@ export default {
     return {
       stationNames: [
         'Metro Służew',
-        'Wróbla'
+        'Wałbrzyska - Wróbla'
       ],
-      selectedStation: ''
+      selectStation: ''
     }
   },
 
@@ -17,8 +17,9 @@ export default {
 
   },
   watch:{
-    selectedStation(val, oldval) {
-      console.log('watch: selectedStation = ', val)
+    selectStation(station, oldStation) {
+      console.log('watch: selectedStation = ', station)
+      this.$store.dispatch('selectStation', station)
     }
   },
 

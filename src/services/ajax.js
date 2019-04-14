@@ -12,7 +12,7 @@ export const ajaxAddStations = async (context) => {
   const stationsResult = await stationsQuery.get()
   const stations = stationsResult.docs.map(doc => doc.data())
 
-  console.log(stations)
+  // console.log(stations)
   context.commit('ADD_STATIONS', stations)
 }
 

@@ -1,0 +1,26 @@
+<v-layout row justify-center>
+  <v-dialog v-model="dialog" scrollable max-width="600px">
+    <template v-slot:activator="{ on }">
+      <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+    </template>
+    <v-card>
+      <v-card-title>Wybierz stację</v-card-title>
+      <v-divider></v-divider>
+      <v-flex xs12 sm6 d-flex center>
+        <v-autocomplete
+          :items="stationNames"
+          v-model="selectStation"
+          cache-items
+          class="mx-3"
+          flat
+          hide-no-data
+          hide-details
+          label="Wpisz pierwsze litery stacji"
+          solo-inverted>
+        </v-autocomplete>
+      </v-flex>
+      <v-divider></v-divider>
+
+    </v-card>
+  </v-dialog>
+</v-layout>

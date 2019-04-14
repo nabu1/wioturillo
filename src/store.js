@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { ajaxAddStations } from './services/ajax'
+import { findStation } from './services/helper'
 // import { initialColumns, totalColumn } from '../data/data'
 
 Vue.use(Vuex)
@@ -17,14 +18,18 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_STATIONS(state, stations) {
-      console.log('%c stations = ' + stations, 'color: yellow')
+      // console.log('%c stations = ' + stations, 'color: yellow')
       state.stations = stations
     },
   },
   actions: {
     addStations(context) {
-      console.log('%c addStations ' , 'color: yellow')
+      // console.log('%c addStations ' , 'color: yellow')
       ajaxAddStations(context)
+    },
+    selectStation(context, station) {
+      // console.log('%c addStations ' , 'color: yellow')
+      findStation(context, station, this.state.stations)
     },
   }
 

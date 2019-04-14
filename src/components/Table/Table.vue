@@ -1,6 +1,8 @@
 <template src="./Table.html"></template>
 
 <script>
+import StationModal from './StationModal/StationModal'
+
 export default {
   data: () => ({
     headers: [
@@ -10,6 +12,10 @@ export default {
       { text: 'bikes', sortable: false, value: 'bikes' }
     ],
   }),
+
+  components: {
+    StationModal
+  },
 
   computed: {
     stations() {
