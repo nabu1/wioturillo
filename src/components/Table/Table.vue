@@ -13,19 +13,20 @@ export default {
 
   computed: {
     stations() {
-      // return [
-      //   { number: '5555', name: 'Wróbla', time: '13:10', bikes: 5 },
-      //   { number: '5555', name: 'Wróbla', time: '13:20', bikes: 6 },
-      //   { number: '6666', name: 'Metro Służewiec', time: '13:10', bikes: 7 },
-      //   { number: '6666', name: 'Metro Służewiec', time: '13:20', bikes: 8 }
-      // ]
+      const arr = []
 
-      console.log(this.$store.getters.getStations)
       const x = this.$store.getters.getStations
-
       const a = x.map(el => el.stations)
 
-      return a[0]
+      a.map(el => {
+        el.map(el => {
+          console.log(el)
+          arr.push(el)
+        })
+      })
+
+      console.log(arr)
+      return arr
     },
   },
 
