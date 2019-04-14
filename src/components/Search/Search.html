@@ -7,10 +7,8 @@
 
       <v-flex xs6 sm3 mx-5 d-flex>
         <v-autocomplete
-          v-model="select"
-          :loading="loading"
           :items="stationNames"
-          :search-input.sync="search"
+          v-model="selectedStation"
           cache-items
           class="mx-3"
           flat
@@ -20,7 +18,7 @@
           solo-inverted>
         </v-autocomplete>
       </v-flex>
-
+<!--
       <v-flex xs2 sm1 mx-5 d-flex>
         <v-select
           :items="items"
@@ -40,7 +38,7 @@
           :items="items"
           label="Godzina Do">
         </v-select>
-      </v-flex>
+      </v-flex> -->
 
       <v-btn color="info">Search</v-btn>
 

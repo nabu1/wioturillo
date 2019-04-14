@@ -8,12 +8,18 @@ export default {
       stationNames: [
         'Metro Służew',
         'Wróbla'
-      ]
+      ],
+      selectedStation: ''
     }
   },
 
   computed: {
 
+  },
+  watch:{
+    selectedStation(val, oldval) {
+      console.log('watch: selectedStation = ', val)
+    }
   },
 
   methods: {
