@@ -17,6 +17,10 @@ module.exports = async (request, response) => {
     parseString(res.data, (err, result) => {
       if (err) console.log('Erorek: ', err)
 
+      const timestamp = Date.now()
+      let time = new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" })
+      time = new Date(time).toLocaleString()
+
       const city = result.markers.country[0].city[0].place
 
       let stations = city
@@ -25,23 +29,21 @@ module.exports = async (request, response) => {
               return {
                 name: el.$.name,
                 bikes: el.$.bikes,
-                number: el.$.number
+                number: el.$.number,
+                time,
+                timestamp
               }
           })
 
-        stations = JSON.stringify(stations)
+        // stations = JSON.stringify(stations)
 
-        const _timestamp = Date.now()
-        let _time = new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" });
-        _time = new Date(_time).toLocaleString()
+        //const stationsWithTimestamp = { time, timestamp, stations }
 
-        const stationsWithTimestamp = { _time, _timestamp, stations }
-
-        db.collection(COLLECTION_NAME).add(stationsWithTimestamp)
+        db.collection(COLLECTION_NAME).add({stations})
           .then(doc => console.log("Document written with ID: ", doc.id))
           .catch(err => console.error("Error adding document: ", err))
 
-        response.end(JSON.stringify(stationsWithTimestamp))
+        response.end(JSON.stringify(stations))
         // response.end(stations.length + '')
       })
   })

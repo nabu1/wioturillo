@@ -6,39 +6,35 @@ export default {
     headers: [
       { text: 'number', sortable: true, value: 'number' },
       { text: 'name', sortable: true, value: 'name' },
+      { text: 'time', sortable: true, value: 'time' },
       { text: 'bikes', sortable: false, value: 'bikes' }
     ],
-
-    stations: [
-      { number: '5555', name: 'Wróbla', bikes: 12 },
-      { number: '6666', name: 'Metro Służewiec', bikes: 21 }
-    ]
   }),
 
   computed: {
-    devs() {
-      //return this.$store.getters.readDevs
-    },
+    stations() {
+      // return [
+      //   { number: '5555', name: 'Wróbla', time: '13:10', bikes: 5 },
+      //   { number: '5555', name: 'Wróbla', time: '13:20', bikes: 6 },
+      //   { number: '6666', name: 'Metro Służewiec', time: '13:10', bikes: 7 },
+      //   { number: '6666', name: 'Metro Służewiec', time: '13:20', bikes: 8 }
+      // ]
 
-    formTitle() {
-      return 'Developer Data'
-    },
+      console.log(this.$store.getters.getStations)
+      const x = this.$store.getters.getStations
 
-    dialog() {
-      return this.$store.getters.getOpenDialog || false
-    },
+      const a = x.map(el => el.stations)
 
-    progressBar() {
-      return this.$store.getters.getProgressBar
+      return a[0]
     },
   },
 
   created() {
-    this.$store.dispatch('readDevsiaków')
+    this.$store.dispatch('addStations')
   },
 
   methods: {
-    
+
   },
 }
 </script>

@@ -17,11 +17,13 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_STATIONS(state, stations) {
+      console.log('%c stations = ' + stations, 'color: yellow')
       state.stations = stations
     },
   },
   actions: {
     addStations(context) {
+      console.log('%c addStations ' , 'color: yellow')
       ajaxAddStations(context)
     },
   }
