@@ -5,7 +5,10 @@
 export default {
   data() {
     return {
-
+      stationNames: [
+        'Metro Służew',
+        'Wróbla'
+      ]
     }
   },
 

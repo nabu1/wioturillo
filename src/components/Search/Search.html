@@ -1,36 +1,41 @@
     <v-toolbar
       dark
       color="grey">
-      <v-toolbar-title>State selection</v-toolbar-title>
-      <v-autocomplete
-        v-model="select"
-        :loading="loading"
-        :items="items"
-        :search-input.sync="search"
-        cache-items
-        class="mx-3"
-        flat
-        hide-no-data
-        hide-details
-        label="What state are you from?"
-        solo-inverted>
-      </v-autocomplete>
+      <v-flex xs2 sm1 mr-5 d-flex>
+        <v-toolbar-title>WioTurillo</v-toolbar-title>
+      </v-flex>
 
-      <v-flex xs4 sm2 d-flex>
+      <v-flex xs6 sm3 mx-5 d-flex>
+        <v-autocomplete
+          v-model="select"
+          :loading="loading"
+          :items="stationNames"
+          :search-input.sync="search"
+          cache-items
+          class="mx-3"
+          flat
+          hide-no-data
+          hide-details
+          label="Wpisz pierwsze litery stacji"
+          solo-inverted>
+        </v-autocomplete>
+      </v-flex>
+
+      <v-flex xs2 sm1 mx-5 d-flex>
         <v-select
           :items="items"
           label="Data">
         </v-select>
       </v-flex>
 
-      <v-flex xs4 sm2 d-flex>
+      <v-flex xs2 sm1 mx-5 d-flex>
         <v-select
           :items="items"
           label="Godzina Od">
         </v-select>
       </v-flex>
 
-      <v-flex xs4 sm2 d-flex>
+      <v-flex xs2 sm1 mx-5 d-flex>
         <v-select
           :items="items"
           label="Godzina Do">
