@@ -21,11 +21,11 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_STATIONS(state, stations) {
-      // console.log('%c stations = ' + stations, 'color: yellow')
+      console.log(JSON.stringify(stations))
       state.stations = stations
     },
     ADD_STATIONS_NAMES(state, stationsNames) {
-      console.log(stationsNames)
+      // console.log(stationsNames)
       // console.log('%c stations = ' + stations, 'color: yellow')
       state.stationsNames = stationsNames
     },

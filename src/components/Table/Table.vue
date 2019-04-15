@@ -9,6 +9,7 @@ export default {
       { text: 'number', sortable: true, value: 'number' },
       { text: 'name', sortable: true, value: 'name' },
       { text: 'time', sortable: true, value: 'time' },
+      { text: 'timestamp', sortable: true, value: 'timestamp' },
       { text: 'bikes', sortable: false, value: 'bikes' }
     ],
   }),
@@ -19,13 +20,7 @@ export default {
 
   computed: {
     stations() {
-      const arr = []
-      const stations = this.$store.getters.getStations
-
-      stations.map(el => el.stations)
-              .map(el => el.map(el => arr.push(el)))
-
-      return arr
+      return this.$store.getters.getStations
     },
   },
 
