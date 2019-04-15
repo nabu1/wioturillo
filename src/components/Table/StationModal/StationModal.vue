@@ -10,7 +10,7 @@
           'Metro Służew',
           'Wałbrzyska - Wróbla'
         ],
-        selectStation: ''
+        selectStation: 'p'
       }
     }
   }
