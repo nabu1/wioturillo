@@ -19,8 +19,8 @@ export const ajaxAddStationsNames = async (context) => {
   const stationsNamesQuery = await firebase.firestore().collection('wioturilki-list').get()
   const stationsNames = stationsNamesQuery.docs.map(doc => doc.data())
 
-  console.log(stationsNames)
-  context.commit('ADD_STATIONS_NAMES', stationsNames)
+  console.log(stationsNames[0].list)
+  context.commit('ADD_STATIONS_NAMES', stationsNames[0].list)
 }
 
 

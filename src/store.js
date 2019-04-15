@@ -25,6 +25,7 @@ export default new Vuex.Store({
       state.stations = stations
     },
     ADD_STATIONS_NAMES(state, stationsNames) {
+      console.log(stationsNames)
       // console.log('%c stations = ' + stations, 'color: yellow')
       state.stationsNames = stationsNames
     },

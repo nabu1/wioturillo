@@ -6,17 +6,18 @@
       return {
         dialogm1: '',
         dialog: false,
-        stationNames: [
-          'Metro Służew',
-          'Wałbrzyska - Wróbla'
-        ],
+        // stationNames: [
+        //   'Metro Służew',
+        //   'Wałbrzyska - Wróbla'
+        // ],
         selectStation: ''
       }
     },
     computed: {
       stationsNames() {
         const stationsNames = this.$store.getters.getStationsNames
-        return stationsNames[0].list
+        // console.log(stationsNames)
+        return stationsNames
       }
     }
   }

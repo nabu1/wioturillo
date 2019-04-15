@@ -5,17 +5,18 @@
 export default {
   data() {
     return {
-      stationNames: [
-        'Metro Służew',
-        'Wałbrzyska - Wróbla'
-      ],
       selectStation: ''
     }
   },
 
   computed: {
-
+    stationsNames() {
+      const stationsNames = this.$store.getters.getStationsNames
+      // console.log(stationsNames)
+      return stationsNames
+    }
   },
+
   watch:{
     selectStation(station, oldStation) {
       console.log('watch: selectedStation = ', station)
