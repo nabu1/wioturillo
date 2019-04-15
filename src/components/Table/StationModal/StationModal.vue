@@ -10,7 +10,13 @@
           'Metro Służew',
           'Wałbrzyska - Wróbla'
         ],
-        selectStation: 'p'
+        selectStation: ''
+      }
+    },
+    computed: {
+      stationsNames() {
+        const stationsNames = this.$store.getters.getStationsNames
+        return stationsNames[0].list
       }
     }
   }

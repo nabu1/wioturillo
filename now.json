@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "name": "wetu",
+  "name": "test",
   "builds": [{
-    "src": "index.js",
+    "src": "_wywal.js",
     "use": "@now/node",
     "config": { "maxLambdaSize": "6mb" }
   }]

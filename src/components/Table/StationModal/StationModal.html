@@ -2,13 +2,13 @@
   <v-dialog v-model="dialog" scrollable max-width="400px">
 
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+      <v-btn color="primary" dark v-on="on">Wybierz stację</v-btn>
     </template>
 
     <v-card>
       <v-card-title>Wybierz stację</v-card-title>
         <v-autocomplete
-          :items="stationNames"
+          :items="stationsNames"
           v-model="selectStation"
           cache-items
           class="mx-3"

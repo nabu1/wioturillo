@@ -8,12 +8,19 @@ firebase.initializeApp(config)
 const db = firebase.firestore()
 
 export const ajaxAddStations = async (context) => {
-  const stationsQuery = await firebase.firestore().collection('wioturilki')
-  const stationsResult = await stationsQuery.get()
-  const stations = stationsResult.docs.map(doc => doc.data())
+  const stationsQuery = await firebase.firestore().collection('wioturilki').get()
+  const stations = stationsQuery.docs.map(doc => doc.data())
 
   // console.log(stations)
   context.commit('ADD_STATIONS', stations)
+}
+
+export const ajaxAddStationsNames = async (context) => {
+  const stationsNamesQuery = await firebase.firestore().collection('wioturilki-list').get()
+  const stationsNames = stationsNamesQuery.docs.map(doc => doc.data())
+
+  console.log(stationsNames)
+  context.commit('ADD_STATIONS_NAMES', stationsNames)
 }
 
 

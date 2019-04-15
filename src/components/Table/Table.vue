@@ -31,6 +31,7 @@ export default {
 
   created() {
     this.$store.dispatch('addStations')
+    this.$store.dispatch('addStationsNames')
   },
 
   methods: {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ajaxAddStations } from './services/ajax'
+import { ajaxAddStations, ajaxAddStationsNames } from './services/ajax'
 import { findStation } from './services/helper'
 // import { initialColumns, totalColumn } from '../data/data'
 
@@ -9,11 +9,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     stations: [],
-
+    stationsNames: []
   },
   getters: {
     getStations(state) {
       return state.stations
+    },
+    getStationsNames(state) {
+      return state.stationsNames
     },
   },
   mutations: {
@@ -21,11 +24,18 @@ export default new Vuex.Store({
       // console.log('%c stations = ' + stations, 'color: yellow')
       state.stations = stations
     },
+    ADD_STATIONS_NAMES(state, stationsNames) {
+      // console.log('%c stations = ' + stations, 'color: yellow')
+      state.stationsNames = stationsNames
+    },
   },
   actions: {
     addStations(context) {
-      // console.log('%c addStations ' , 'color: yellow')
       ajaxAddStations(context)
+
+    },
+    addStationsNames(context) {
+      ajaxAddStationsNames(context)
     },
     selectStation(context, station) {
       // console.log('%c addStations ' , 'color: yellow')
