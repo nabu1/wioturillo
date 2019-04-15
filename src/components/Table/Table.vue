@@ -6,12 +6,18 @@ import StationModal from './StationModal/StationModal'
 export default {
   data: () => ({
     headers: [
-      { text: 'number', sortable: true, value: 'number' },
+      { text: 'timestamp', sortable: true, value: 'timestamp' },
+      // { text: 'number', sortable: true, value: 'number' },
       { text: 'name', sortable: true, value: 'name' },
       { text: 'time', sortable: true, value: 'time' },
-      { text: 'timestamp', sortable: true, value: 'timestamp' },
       { text: 'bikes', sortable: false, value: 'bikes' }
     ],
+    chart: {
+      '2017-05-13': 2,
+      '2017-05-14': 5,
+      '2017-05-15': 2,
+      '2017-05-16': 8
+    }
   }),
 
   components: {

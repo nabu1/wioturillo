@@ -1,5 +1,6 @@
 <div>
   <v-app id="table">
+    <line-chart :data="chart"></line-chart>
     <v-data-table
       :headers="headers"
       :items="stations"
@@ -7,16 +8,14 @@
       dark>
 
       <template v-slot:items="props">
-        <td>{{ props.item.number }}</td>
+        <td>{{ props.item.timestamp }}</td>
         <td>{{ props.item.name }}</td>
         <td>{{ props.item.time }}</td>
-        <td>{{ props.item.timestamp }}</td>
         <td>{{ props.item.bikes }}</td>
       </template>
 
     </v-data-table>
 
-   <StationModal />
 
   </v-app>
 </div>

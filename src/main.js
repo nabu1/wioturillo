@@ -7,6 +7,10 @@ import App from './App.vue'
 import routes from './routes'
 import store from './store'
 
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+Vue.use(VueChartkick, {adapter: Chart})
 Vue.use(Vuetify)
 Vue.use(VueRouter)
 
