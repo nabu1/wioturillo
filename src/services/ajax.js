@@ -12,6 +12,7 @@ export const ajaxAddStations = async (context) => {
   const stations = stationsQuery.docs.map(doc => doc.data())
 
   // console.log(JSON.stringify(stations))
+
   context.commit('ADD_STATIONS', stations)
 }
 

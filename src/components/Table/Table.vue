@@ -11,13 +11,7 @@ export default {
       { text: 'name', sortable: true, value: 'name' },
       { text: 'time', sortable: true, value: 'time' },
       { text: 'bikes', sortable: false, value: 'bikes' }
-    ],
-    chart: {
-      '2017-05-13': 2,
-      '2017-05-14': 5,
-      '2017-05-15': 2,
-      '2017-05-16': 8
-    }
+    ]
   }),
 
   components: {
@@ -26,7 +20,18 @@ export default {
 
   computed: {
     stations() {
+      console.log(this.$store.getters.getStations)
       return this.$store.getters.getStations
+    },
+    chart() {
+      // return {
+      //   '2019-4-15 20:56:35': 2,
+      //   '2019-4-15 21:56:35': 6,
+      //   '2019-4-15 22:56:35': 4,
+      //   '2019-4-15 23:56:35': 8,
+      // }
+      console.log(this.$store.getters.getChartPoints)
+      return this.$store.getters.getChartPoints
     },
   },
 

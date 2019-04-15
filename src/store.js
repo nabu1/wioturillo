@@ -2,14 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { ajaxAddStations, ajaxAddStationsNames } from './services/ajax'
 import { findStation } from './services/helper'
-// import { initialColumns, totalColumn } from '../data/data'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     stations: [],
-    stationsNames: []
+    stationsNames: [],
+    chartPoints: {}
   },
   getters: {
     getStations(state) {
@@ -18,17 +18,20 @@ export default new Vuex.Store({
     getStationsNames(state) {
       return state.stationsNames
     },
+    getChartPoints(state) {
+      return state.chartPoints
+    },
   },
   mutations: {
     ADD_STATIONS(state, stations) {
-      console.log(JSON.stringify(stations))
       state.stations = stations
     },
     ADD_STATIONS_NAMES(state, stationsNames) {
-      // console.log(stationsNames)
-      // console.log('%c stations = ' + stations, 'color: yellow')
       state.stationsNames = stationsNames
     },
+    ADD_CHART_POINTS(state, chartPoints) {
+      state.chartPoints = chartPoints
+    }
   },
   actions: {
     addStations(context) {
@@ -38,6 +41,7 @@ export default new Vuex.Store({
     addStationsNames(context) {
       ajaxAddStationsNames(context)
     },
+
     selectStation(context, station) {
       // console.log('%c addStations ' , 'color: yellow')
       findStation(context, station, this.state.stations)

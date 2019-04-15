@@ -1,22 +1,27 @@
 export const findStation = (context, station, allStations) => {
   console.log('%c station = ' + station, 'color: orange')
-  // console.log(JSON.stringify(allStations))
-
   const stationsArr = []
+  const chartPoints = {}
 
   allStations
     .map(el => el.stations)
     .map(el => el.map(el => stationsArr.push(el)))
 
-  // console.log(stationsArr)
-
-  // const arr1 = arr.filter(el => el.name === 'Wałbrzyska - Wróbla')
   const selectedStation = stationsArr.filter(el => el.name === station)
+  console.log('selectedStation = ' + selectedStation)
 
-  console.log(selectedStation)
-  // selectedStation.sort((a, b) => a.timestamp.localeCompare(b.timestamp))
 
-  // context.commit('ADD_STATIONS', selectedStation)
+  selectedStation.map(el => {
+    // return { [el.time]: +el.bikes }
+    const time = "'" + el.time + "'"
+    // return { [el.time]: +el.bikes }
+    chartPoints[time] = +el.bikes
+  })
+
+  // console.log(selectedStation)
+  console.log(chartPoints)
+
   context.commit('ADD_STATIONS', selectedStation)
+  context.commit('ADD_CHART_POINTS', chartPoints)
 }
 
