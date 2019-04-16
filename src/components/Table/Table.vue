@@ -1,7 +1,6 @@
 <template src="./Table.html"></template>
 
 <script>
-import StationModal from './StationModal/StationModal'
 
 export default {
   data: () => ({
@@ -11,12 +10,11 @@ export default {
       { text: 'name', sortable: true, value: 'name' },
       { text: 'time', sortable: true, value: 'time' },
       { text: 'bikes', sortable: false, value: 'bikes' }
-    ]
+    ],
+    paginationSync: {
+      descending: true
+    }
   }),
-
-  components: {
-    StationModal
-  },
 
   computed: {
     stations() {

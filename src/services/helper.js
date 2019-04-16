@@ -1,5 +1,7 @@
 export const findStation = (context, station, allStations) => {
-  console.log('%c station = ' + station, 'color: orange')
+  console.log('%c allStations = ',  allStations, 'color: orange')
+  console.log('%c station = ' + station, 'color: lime')
+
   const stationsArr = []
   const chartPoints = {}
 
@@ -7,18 +9,16 @@ export const findStation = (context, station, allStations) => {
     .map(el => el.stations)
     .map(el => el.map(el => stationsArr.push(el)))
 
-  const selectedStation = stationsArr.filter(el => el.name === station)
-  console.log('selectedStation = ' + selectedStation)
+  let selectedStation = stationsArr.filter(el => el.name === station)
+  selectedStation.sort((a, b) => b.timestamp - a.timestamp)
 
+  console.log('selectedStation = ' + JSON.stringify(selectedStation))
 
   selectedStation.map(el => {
-    // return { [el.time]: +el.bikes }
     const time = "'" + el.time + "'"
-    // return { [el.time]: +el.bikes }
     chartPoints[time] = +el.bikes
   })
 
-  // console.log(selectedStation)
   console.log(chartPoints)
 
   context.commit('ADD_STATIONS', selectedStation)

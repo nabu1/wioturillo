@@ -19,7 +19,7 @@ export default {
 
   watch:{
     selectStation(station, oldStation) {
-      console.log('watch: selectedStation = ', station)
+      console.log('watch: selectedStation = ', station)  // todo zamiast ściągnąć z fajerka, bierze allstations w ktorym są tylko Wróble
       this.$store.dispatch('selectStation', station)
     }
   },
