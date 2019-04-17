@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "name": "test",
+  "name": "wioturillo",
   "builds": [{
-    "src": "_wywal.js",
     "use": "@now/node",
     "config": { "maxLambdaSize": "6mb" }
   }]

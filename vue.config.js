@@ -1,5 +1,5 @@
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   configureWebpack: config => {
@@ -7,12 +7,12 @@ module.exports = {
 
     return {
       plugins: [
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'server',
-          generateStatsFile: true,
-          mode: 'production',
-          openAnalyzer: false
-        }),
+        // new BundleAnalyzerPlugin({
+        //   analyzerMode: 'server',
+        //   generateStatsFile: true,
+        //   mode: 'production',
+        //   openAnalyzer: false
+        // }),
 
       ]
     }
