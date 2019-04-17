@@ -1,10 +1,32 @@
-const arr = [
-  { name: 'bob', age: 1 },
-  { name: 'adam', age: 3 },
-  { name: 'dama', age: 2 }
-]
-// console.log ('arr PRZED =', arr)
+const axios = require('axios')
 
-const arrByAge = arr.sort ((a, b) => b.age - a.age ) // liczby
+const COLLECTION_NAME = 'wioturillo'
+const STATIONS_LIST = 'wioturillo-lista'
 
-console.log(arrByAge)
+const urlPrefix = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${COLLECTION_NAME}?`
+const urlSufix = `apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI`
+
+const stationName1 = 'Miodowa'
+const stationName2 = 'Wałbrzyska - Wróbla'
+const stationName3 = 'Metro Służew'
+// const stationName4 = encodeURIComponent(`${stationName2}`)
+const stationNameString = encodeURIComponent(`'${stationName3}'`)
+
+const query = `q={'name': ${stationNameString}}`
+
+const url = urlPrefix + query + '&' + urlSufix
+
+// axios.get(url)
+//   .then((res) => console.log(res.data))
+//   .catch(err => console.log('Eror: ', err))
+
+// console.log(url)
+
+// const urlLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${STATIONS_LIST}?`+ 'apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI'
+const urlLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${STATIONS_LIST}?`+ urlSufix
+
+axios.get(urlLista)
+  .then((res) => console.log(res.data))
+  .catch(err => console.log('Eror: ', err))
+
+console.log(urlLista)

@@ -1,27 +1,42 @@
-const firebase = require('firebase/app')
-require('firebase/firestore')
+const axios = require('axios')
 
-const url = 'http://gdzieturilo.pl/s/?action=nextbikeXML&v=PL'
-const config = { apiKey: "AIzaSyBdFBbhzU2XI4Ce-HjIsyeosWaifFmR2kc", projectId: "firestoras" }
+const COLLECTION_NAME = 'wioturillo'
+const STATIONS_LIST = 'wioturillo-lista'
 
-firebase.initializeApp(config)
-const db = firebase.firestore()
+const urlPrefix = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${COLLECTION_NAME}?`
+const urlSufix = `apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI`
+const urlLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${STATIONS_LIST}?`+ urlSufix
 
-export const ajaxAddStations = async (context) => {
-  const stationsQuery = await firebase.firestore().collection('wioturilki').get()
-  const stations = stationsQuery.docs.map(doc => doc.data())
+export const ajaxFindStation = async (context, station) => {
+  // const station1 = 'Miodowa'
+  // const station2 = 'Wałbrzyska - Wróbla'
+  // const station3 = 'Metro Służew'
 
-  // console.log(JSON.stringify(stations))
+  console.log('%c station = ' + station, 'color: yellow')
 
-  context.commit('ADD_STATIONS', stations)
+  const stationString = encodeURIComponent(`'${station}'`)
+  const query = `q={'name': ${stationString}}`
+
+  const url = urlPrefix + query + '&' + urlSufix
+  console.log(url)
+
+  axios.get(url)
+    .then((res) => {
+      console.log(res.data)
+      context.commit('FIND_STATION', res.data)
+    })
+    .catch(err => console.log('Eror: ', err))
 }
 
 export const ajaxAddStationsNames = async (context) => {
-  const stationsNamesQuery = await firebase.firestore().collection('wioturilki-list').get()
-  const stationsNames = stationsNamesQuery.docs.map(doc => doc.data())
+  console.log(urlLista)
 
-  // console.log(stationsNames[0].list)
-  context.commit('ADD_STATIONS_NAMES', stationsNames[0].list)
+  axios.get(urlLista)
+    .then((res) => {
+      // console.log(res.data[0].list)
+      context.commit('ADD_STATIONS_NAMES', res.data[0].list)
+    })
+    .catch(err => console.log('Eror: ', err))
 }
 
 

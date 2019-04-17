@@ -6,10 +6,10 @@
         <v-toolbar-title>WioTurillo</v-toolbar-title>
       </v-flex>
 
-      <v-flex xs6 sm3 mx-5 d-flex>
+      <v-flex xs10 sm5 mx-5 d-flex>
         <v-autocomplete
           :items="stationsNames"
-          v-model="selectStation"
+          v-model="findStation"
           cache-items
           class="mx-3"
           flat
@@ -18,9 +18,24 @@
           label="Wpisz pierwsze litery stacji"
           solo-inverted>
         </v-autocomplete>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            :disabled="!findStation"
+            color="info"
+            class="px-5"
+            @click="findStation = null">
+            Clear
+            <v-icon right>mdi-close-circle</v-icon>
+          </v-btn>
+        </v-card-actions>
+
+
+
       </v-flex>
 
-      <v-btn color="info">Wykres</v-btn>
+      <!-- <v-btn color="info">Wykres</v-btn> -->
 
     </v-toolbar>
   </div>
