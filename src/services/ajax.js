@@ -19,7 +19,7 @@ export const ajaxFindStation = async (context, station) => {
 
   axios.get(url)
     .then((res) => {
-      // console.log(res.data)
+      console.log(res.data)
       chartPoints(context, res.data)
       context.commit('FIND_STATION', res.data)
     })
