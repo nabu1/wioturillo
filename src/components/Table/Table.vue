@@ -18,11 +18,11 @@ export default {
 
   computed: {
     stations() {
-      console.log(this.$store.getters.getStations)
+      // console.log(this.$store.getters.getStations)
       return this.$store.getters.getStations
     },
     chart() {
-      console.log(this.$store.getters.getChartPoints)
+      // console.log(this.$store.getters.getChartPoints)
       return this.$store.getters.getChartPoints
     },
   },
