@@ -1,21 +1,14 @@
 const axios = require('axios')
 import { chartPoints } from './helper'
+import { CONSTANTS } from '../data/constants'
 
-const COLLECTION_NAME = 'wioturillo'
-const STATIONS_LIST = 'wioturillo-lista'
-
-const urlPrefix = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${COLLECTION_NAME}?`
-const urlSufix = `apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI`
-const urlLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${STATIONS_LIST}?`+ urlSufix
+const urlPrefix = `${CONSTANTS.MLAB}${CONSTANTS.COLLECTION_NAME}/collections/${CONSTANTS.COLLECTION_NAME}?`
+const urlLista = `${CONSTANTS.MLAB}${CONSTANTS.COLLECTION_NAME}/collections/${CONSTANTS.STATIONS_LIST}?`+ CONSTANTS.API_KEY
 
 export const ajaxFindStation = async (context, station) => {
-  console.log('%c station = ' + station, 'color: yellow')
-
   const stationString = encodeURIComponent(`'${station}'`)
   const query = `q={'name': ${stationString}}`
-
-  const url = urlPrefix + query + '&' + urlSufix
-  // console.log(url)
+  const url = urlPrefix + query + '&' + CONSTANTS.API_KEY
 
   axios.get(url)
     .then((res) => {
@@ -27,11 +20,8 @@ export const ajaxFindStation = async (context, station) => {
 }
 
 export const ajaxAddStationsNames = async (context) => {
-  // console.log(urlLista)
-
   axios.get(urlLista)
     .then((res) => {
-      // console.log(res.data[0].list)
       context.commit('ADD_STATIONS_NAMES', res.data[0].list)
     })
     .catch(err => console.log('Eror: ', err))
