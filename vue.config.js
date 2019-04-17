@@ -13,8 +13,12 @@ module.exports = {
         //   mode: 'production',
         //   openAnalyzer: false
         // }),
-
-      ]
+      ],
+      resolve: {
+        alias: {
+          moment: 'moment/src/moment'
+        }
+      }
     }
   }
 }
