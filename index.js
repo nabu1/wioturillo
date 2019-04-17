@@ -1,53 +1,64 @@
 const axios = require('axios')
 const parseString = require('xml2js').parseString
-const firebase = require("firebase")
-require("firebase/firestore")
 
-const COLLECTION_NAME = 'wioturilki'
-const url = 'http://gdzieturilo.pl/s/?action=nextbikeXML&v=PL'
-const config = { apiKey: "AIzaSyBdFBbhzU2XI4Ce-HjIsyeosWaifFmR2kc", projectId: "firestoras" }
-
-firebase.initializeApp(config)
-const app = firebase.app()
-const db = firebase.firestore()
+const COLLECTION_NAME = 'wioturillo'
+const STATIONS_LIST = 'wioturillo-lista'
+const urlGdzieturilo = 'http://gdzieturilo.pl/s/?action=nextbikeXML&v=PL'
+const urlWioturillo = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${COLLECTION_NAME}?apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI`
+const urlWioturilloLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NAME}/collections/${STATIONS_LIST}?apiKey=XRr-4BkluC11FFgtbOnUhzUlodvp8RfI&u=true`
 
 module.exports = async (request, response) => {
-  await axios.get(url)
-  .then(res => {
-    parseString(res.data, (err, result) => {
-      if (err) console.log('Erorek: ', err)
+// const wetu = async (request, response) => {
+  await axios.get(urlGdzieturilo)
+    .then(res => {
+      parseString(res.data, (err, result) => {
+        if (err) console.log('Erorek: ', err)
 
-      const timestamp = Date.now()
-      let time = new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" })
-      time = new Date(time).toLocaleString()
+        const now = new Date()
+        const timestamp = now.getTime()
+        let time = now.toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" })
+        time = new Date(time).toLocaleString()
+        const hour = now.getHours() + 1
+        const minute = now.getMinutes()
 
-      const city = result.markers.country[0].city[0].place
+        console.log('Time: ', time)
+        console.log('Hour: ', hour)
+        console.log('Minute: ', minute)
 
-      let stations = city
-        .filter (el => el.$.name === 'Wałbrzyska - Wróbla' || el.$.name === 'Metro Służew')  // zakomentuj tą linię, by ściągać wszystkie stacje
-        .map(el => {
-              return {
-                name: el.$.name,
-                bikes: el.$.bikes,
-                number: el.$.number,
-                time,
-                timestamp
-              }
+        const city = result.markers.country[0].city[0].place
+
+        let stations = city
+          // .filter (el => el.$.name === 'Wałbrzyska - Wróbla' || el.$.name === 'Metro Służew' || el.$.name === 'Miodowa')  // zakomentuj tą linię, by ściągać wszystkie stacje
+          .map(el => {
+            return {
+              name: el.$.name,
+              bikes: el.$.bikes,
+              number: el.$.number,
+              time,
+              timestamp
+            }
           })
 
-        // stations = JSON.stringify(stations)
+        const list = city.map(el => el.$.name).sort()
 
-        //const stationsWithTimestamp = { time, timestamp, stations }
+        axios.post(urlWioturillo, stations)
+          .then(res => console.log(stations))
+          .catch(err => console.log('Błąd zapisu stacji na mLabie :( : ', err))
 
-        db.collection(COLLECTION_NAME).add({stations})
-          .then(doc => console.log("Document written with ID: ", doc.id))
-          .catch(err => console.error("Error adding document: ", err))
+        // if(hour === 23 && minute < 59) {
+          axios.put(urlWioturilloLista, { time, list })
+            .then(res => console.log(list))
+            .catch(err => console.log('Błąd zapisu listy stacji na mLabie :( : ', err))
+        // }
 
-        response.end(JSON.stringify(stations))
-        // response.end(stations.length + '')
+        response.end('Zapisałem stacje i listę stacji na mLabie :)')
+        // console.log('Zapisałem stacje i listę stacji na mLabie :)')
       })
-  })
-  .catch(err => {
-    response.end('Erroras: ' + err)
-  })
+    })
+    .catch(err => {
+      response.end('Erroras: ' + err)
+      // console.log('Erroras: ' + err)
+    })
 }
+
+// wetu()
