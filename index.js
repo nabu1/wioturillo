@@ -1,5 +1,6 @@
 const axios = require('axios')
 const parseString = require('xml2js').parseString
+import { CONSTANTS } from '../data/constants'
 
 const COLLECTION_NAME = 'wioturillo'
 const STATIONS_LIST = 'wioturillo-lista'
@@ -9,7 +10,8 @@ const urlWioturilloLista = `https://api.mlab.com/api/1/databases/${COLLECTION_NA
 
 module.exports = async (request, response) => {
 // const wetu = async (request, response) => {
-  await axios.get(urlGdzieturilo)
+  // await axios.get(urlGdzieturilo)
+  await axios.get(CONSTANTS.GDZIETURILO)
     .then(res => {
       parseString(res.data, (err, result) => {
         if (err) console.log('Erorek: ', err)

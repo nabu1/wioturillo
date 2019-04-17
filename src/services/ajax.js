@@ -2,13 +2,13 @@ const axios = require('axios')
 import { chartPoints } from './helper'
 import { CONSTANTS } from '../data/constants'
 
-const urlPrefix = `${CONSTANTS.MLAB}${CONSTANTS.COLLECTION_NAME}/collections/${CONSTANTS.COLLECTION_NAME}?`
-const urlLista = `${CONSTANTS.MLAB}${CONSTANTS.COLLECTION_NAME}/collections/${CONSTANTS.STATIONS_LIST}?`+ CONSTANTS.API_KEY
-
 export const ajaxFindStation = async (context, station) => {
+
+  console.log(CONSTANTS.MLAB_PREFIX)
+
   const stationString = encodeURIComponent(`'${station}'`)
   const query = `q={'name': ${stationString}}`
-  const url = urlPrefix + query + '&' + CONSTANTS.API_KEY
+  const url = CONSTANTS.MLAB_PREFIX + query + '&' + CONSTANTS.API_KEY
 
   axios.get(url)
     .then((res) => {
@@ -20,7 +20,7 @@ export const ajaxFindStation = async (context, station) => {
 }
 
 export const ajaxAddStationsNames = async (context) => {
-  axios.get(urlLista)
+  axios.get(CONSTANTS.MLAB_LISTA)
     .then((res) => {
       context.commit('ADD_STATIONS_NAMES', res.data[0].list)
     })
