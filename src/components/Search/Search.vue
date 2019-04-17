@@ -19,7 +19,6 @@ export default {
 
   watch:{
     findStation(station, oldStation) {
-      console.log('watch: findStation = ', station)  // todo zamiast ściągnąć z fajerka, bierze allstations w ktorym są tylko Wróble
       this.$store.dispatch('findStation', station)
     }
   },
