@@ -1,99 +1,48 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ajaxAddAllShops, ajaxFindSelectedShops } from '../services/ajax'
-import { initialColumns, totalColumn } from '../data/data'
+import { ajaxFindStation, ajaxAddStationsNames } from '../services/ajax'
+import { findStation } from '../services/helper'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    allShops: [],
-    allShopsCopy: [],
-    selectedShops: [],
-    items: [],
-    fields: [],
-    stocksSelected: [],
-    showTable: false,
-    loading: false
+    station: [],
+    stationsNames: [],
+    chartPoints: {}
   },
   getters: {
-    getAllShops(state) {
-      return state.allShops
+    getStations(state) {
+      return state.station
     },
-    getAllShopsCopy(state) {
-      return state.allShopsCopy
+    getStationsNames(state) {
+      return state.stationsNames
     },
-    getSelectedShops(state) {
-      return state.selectedShops
+    getChartPoints(state) {
+      return state.chartPoints
     },
-    getStock(state) {
-      return state.fields
-    },
-    getStocksSelected(state) {
-      return state.stocksSelected
-    },
-    getShowTable(state) {
-      return state.showTable
-    },
-    getLoading(state) {
-      return state.loading
-    }
   },
   mutations: {
-    ADD_ALL_SHOPS(state, allShops) {
-      state.allShops = allShops
-      state.allShopsCopy = allShops
+    FIND_STATION(state, station) {
+      state.station = station
     },
-    FIND_SELECTED_SHOPS(state, shopsInRadius) {
-      if (!shopsInRadius.length) {
-        state.stocksSelected = []
-      }
-
-      state.selectedShops = shopsInRadius
+    ADD_STATIONS_NAMES(state, stationsNames) {
+      state.stationsNames = stationsNames
     },
-    GET_STOCK(state, columns) {
-      if (columns.stocksSelected.length) {
-        state.fields = initialColumns.concat(totalColumn).concat(columns.stocksSelected)
-      }
-      else {
-        state.fields = initialColumns.concat(columns.stocksSelected)
-      }
-
-      state.stocksSelected = columns.stocksSelected
-    },
-    TOGGLE_CHECKBOXES(state) {
-      state.stocksSelected = []
-    },
-    SHOW_TABLE(state, bool) {
-      state.fields = initialColumns
-      state.showTable = bool
-    },
-    SHOW_LOADER(state, bool) {
-      state.loading = bool
+    ADD_CHART_POINTS(state, chartPoints) {
+      state.chartPoints = chartPoints
     }
   },
   actions: {
-    addAllShops(context) {
-      ajaxAddAllShops(context)
+    addStationsNames(context) {
+      ajaxAddStationsNames(context)
     },
-    findSelectedShops(context, { homeData, radius, allShops }) {
-      ajaxFindSelectedShops(context, { homeData, radius, allShops })
+
+    findStation(context, stationAndHours) {
+      console.log('%c station = ' + stationAndHours.station, 'color: lime')
+      console.log('%c hours = ' + stationAndHours.hours, 'color: lime')
+      ajaxFindStation(context, stationAndHours)
     },
-    getStock(context, stocksSelected) {
-      context.commit('GET_STOCK', { initialColumns, stocksSelected })
-    },
-    addTotal(context, shopsWithTotal) {
-      context.commit('ADD_ALL_SHOPS', shopsWithTotal)
-    },
-    toggleCheckboxes(context) {
-      context.commit('TOGGLE_CHECKBOXES')
-    },
-    showTable(context, bool) {
-      context.commit('SHOW_TABLE', bool)
-    },
-    showLoader(context, bool) {
-      context.commit('SHOW_LOADER', bool)
-    }
   }
 
 })

@@ -3,12 +3,12 @@ import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 import 'vuetify/dist/vuetify.min.css'
-import App from './App.vue'
-import routes from './routes'
-import store from './store'
-
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+
+import App from './App.vue'
+import routes from './routes'
+import store from './store/store'
 
 Vue.use(VueChartkick, {adapter: Chart})
 Vue.use(Vuetify)

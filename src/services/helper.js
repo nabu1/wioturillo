@@ -10,7 +10,7 @@ export const chartPoints = (context, stationArray) => {
     chartPoints[time] = +el.bikes
   })
 
-  console.log(chartPoints)
+  // console.log(chartPoints)
 
   context.commit('ADD_CHART_POINTS', chartPoints)
 }

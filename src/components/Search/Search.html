@@ -4,7 +4,7 @@
         <v-toolbar-title>WioTurillo</v-toolbar-title>
       </v-flex>
 
-      <v-flex xs12 sm6 mx-5 d-flex>
+      <v-flex xs4 sm2 mx-5 d-flex>
         <v-autocomplete
           :items="stationsNames"
           v-model="findStation"
@@ -16,29 +16,32 @@
           label="Wpisz pierwsze litery stacji"
           solo-inverted>
         </v-autocomplete>
+      </v-flex>
 
+      <v-flex xs2 sm1 md1>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             :disabled="!findStation"
             color="info"
-            class="px-5"
+            class="pl-5 pr-4"
             @click="findStation = null">
             Clear
             <v-icon right>mdi-close-circsnyk testle</v-icon>
           </v-btn>
         </v-card-actions>
-
-        <v-flex xs2 sm4 d-flex class="px-5">
-          <v-select
-            :items="hours"
-            label="Godzin">
-          </v-select>
-        </v-flex>
-
       </v-flex>
 
-      <!-- <v-btn color="info">Wykres</v-btn> -->
+        <v-flex xs12 sm6 md6>
+        <v-radio-group v-model="hours" row  class="mx-5 mt-4">
+          <v-radio label="1" color="primary" value="1"></v-radio>
+          <v-radio label="2" color="primary" value="2"></v-radio>
+          <v-radio label="4" color="primary" value="4"></v-radio>
+          <v-radio label="8" color="primary" value="8"></v-radio>
+          <v-radio label="12" color="primary" value="12"></v-radio>
+          <v-radio label="24 hours" color="primary" value="24"></v-radio>
+        </v-radio-group>
+      </v-flex>
 
     </v-toolbar>
   </div>

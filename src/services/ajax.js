@@ -2,17 +2,14 @@ const axios = require('axios')
 import { chartPoints } from './helper'
 import { CONSTANTS } from '../data/constants'
 
-export const ajaxFindStation = async (context, station) => {
-
-  console.log(CONSTANTS.MLAB_PREFIX)
-
-  const stationString = encodeURIComponent(`'${station}'`)
-  const query = `q={'name': ${stationString}}&l=100`
+export const ajaxFindStation = async (context, stationAndHours) => {
+  const stationString = encodeURIComponent(`'${stationAndHours.station}'`)
+  const limit = stationAndHours.hours * 12
+  const query = `q={'name': ${stationString}}&l=${limit}`
   const url = CONSTANTS.MLAB_PREFIX + query + '&' + CONSTANTS.API_KEY
 
   axios.get(url)
     .then((res) => {
-      console.log(res.data)
       chartPoints(context, res.data)
       context.commit('FIND_STATION', res.data)
     })

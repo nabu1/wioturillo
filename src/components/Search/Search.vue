@@ -21,18 +21,24 @@ export default {
   mounted() {
     if (localStorage.getItem('wioturillo')) {
       this.findStation = localStorage.getItem('wioturillo')
+      this.hours = localStorage.getItem('wioturillo-hours')
     }
   },
 
   watch:{
     findStation(station, oldStation) {
-      console.log('%c station = ' + station, 'color: white')
+      console.log('%c station = ' + station, 'color: yellow')
+      console.log('%c this.hours = ' + this.hours, 'color: yellow')
       localStorage.setItem('wioturillo', station)
-      this.$store.dispatch('findStation', station)
-    }
-  },
+      this.$store.dispatch('findStation', { station, hours: this.hours })
+    },
 
-  methods: {
+    hours(hours, oldHours) {
+      console.log('%c this.findStation = ' + this.findStation, 'color: orange')
+      console.log('%c hours = ' + hours, 'color: orange')
+      localStorage.setItem('wioturillo-hours', hours)
+      this.$store.dispatch('findStation', { station: this.findStation, hours })
+    }
   },
 }
 </script>
