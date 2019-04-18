@@ -1,17 +1,15 @@
 <div id="search">
-  <v-toolbar
-      dark
-      color="grey">
+  <v-toolbar dark color="grey">
       <v-flex xs2 sm1 mr-5 d-flex>
         <v-toolbar-title>WioTurillo</v-toolbar-title>
       </v-flex>
 
-      <v-flex xs10 sm5 mx-5 d-flex>
+      <v-flex xs12 sm6 mx-5 d-flex>
         <v-autocomplete
           :items="stationsNames"
           v-model="findStation"
           cache-items
-          class="mx-3"
+          class="mx-0"
           flat
           hide-no-data
           hide-details
@@ -27,11 +25,16 @@
             class="px-5"
             @click="findStation = null">
             Clear
-            <v-icon right>mdi-close-circle</v-icon>
+            <v-icon right>mdi-close-circsnyk testle</v-icon>
           </v-btn>
         </v-card-actions>
 
-
+        <v-flex xs2 sm4 d-flex class="px-5">
+          <v-select
+            :items="hours"
+            label="Godzin">
+          </v-select>
+        </v-flex>
 
       </v-flex>
 

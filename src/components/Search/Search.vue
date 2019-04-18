@@ -5,7 +5,8 @@
 export default {
   data() {
     return {
-      findStation: ''
+      findStation: '',
+      hours: [1, 2, 4, 8, 12, 24]
     }
   },
 
@@ -17,8 +18,16 @@ export default {
     }
   },
 
+  mounted() {
+    if (localStorage.getItem('wioturillo')) {
+      this.findStation = localStorage.getItem('wioturillo')
+    }
+  },
+
   watch:{
     findStation(station, oldStation) {
+      console.log('%c station = ' + station, 'color: white')
+      localStorage.setItem('wioturillo', station)
       this.$store.dispatch('findStation', station)
     }
   },

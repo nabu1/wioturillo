@@ -7,7 +7,7 @@ export const ajaxFindStation = async (context, station) => {
   console.log(CONSTANTS.MLAB_PREFIX)
 
   const stationString = encodeURIComponent(`'${station}'`)
-  const query = `q={'name': ${stationString}}`
+  const query = `q={'name': ${stationString}}&l=100`
   const url = CONSTANTS.MLAB_PREFIX + query + '&' + CONSTANTS.API_KEY
 
   axios.get(url)
